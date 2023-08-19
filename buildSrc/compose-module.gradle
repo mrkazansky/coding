@@ -33,6 +33,13 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 kotlin {
@@ -67,4 +74,23 @@ dependencies {
 
     implementation(Koin.core)
     implementation(Koin.compose)
+
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.0.0-beta05")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+
+    testImplementation(Testing.testJunit)
+    testImplementation(Testing.testMockk)
+    testImplementation(Testing.testKoin)
+    testImplementation(Testing.testTurbine)
+    testImplementation(Testing.testCoroutine)
+    testImplementation(Testing.testRandomObject)
+    testImplementation(Testing.androidComposeTest)
+    testImplementation(Testing.testRoboelectric)
+    testImplementation(project(":core:core_testing"))
+
+    androidTestImplementation(Testing.androidJunitExt)
+    androidTestImplementation(Testing.androidComposeTest)
+    androidTestImplementation(Testing.androidTestRule)
+
+    implementation(project(":core:core_ui"))
 }

@@ -49,4 +49,13 @@ dependencies {
 
     implementation(Koin.core)
     implementation(Koin.compose)
+
+    testImplementation(Testing.testJunit)
+    testImplementation(Testing.testMockk)
+    testImplementation(Testing.testKoin)
+    testImplementation(Testing.testCoroutine)
+    testImplementation(Testing.testTurbine)
+    testImplementation(Testing.testRandomObject)
+
+    testImplementation(project(":core:core_testing"))
 }

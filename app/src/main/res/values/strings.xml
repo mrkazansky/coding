@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">StandardArchitect</string>
+    <string name="bottom_search">Products</string>
+    <string name="bottom_cart">Cart</string>
 </resources>
