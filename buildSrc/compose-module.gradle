@@ -11,6 +11,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        defaultPublishConfig 'release'
+        publishNonDefault true
     }
     buildFeatures {
         compose true
@@ -32,6 +35,13 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+        unitTests {
+            includeAndroidResources = true
+        }
     }
 }
 
@@ -64,7 +74,27 @@ dependencies {
     implementation 'androidx.compose.ui:ui-graphics'
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.compose.material3:material3'
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     implementation(Koin.core)
     implementation(Koin.compose)
+
+    testImplementation(Testing.testJunit)
+    testImplementation(Testing.testMockk)
+    testImplementation(Testing.testKoin)
+    testImplementation(Testing.testTurbine)
+    testImplementation(Testing.testCoroutine)
+    testImplementation(Testing.testRandomObject)
+    testImplementation(Testing.androidComposeTest)
+    testImplementation(Testing.testRoboelectric)
+
+    androidTestImplementation(Testing.androidJunitExt)
+    androidTestImplementation(Testing.androidComposeTest)
+    androidTestImplementation(Testing.androidTestRule)
+
+    implementation(project(":core:core_ui"))
+    debugImplementation(project(":core:core_ui"))
+
+    testImplementation(project(":core:core_testing"))
 }

@@ -1,10 +1,11 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
-    namespace = "com.example.standardarchitect"
+    namespace = "com.kz.coding"
     compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
@@ -47,24 +48,49 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.activity:activity-compose:1.7.2")
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    implementation(AndroidX.coreKtx)
+    implementation(AndroidX.lifecycle)
+    implementation(AndroidX.activityCompose)
+    implementation(platform(AndroidX.kotlinPlaftorm))
+
+    implementation(Koin.core)
+    implementation(Koin.compose)
+
+    implementation(platform(AndroidX.composePlaftorm))
+    implementation(AndroidX.lifecycleCompose)
+    implementation(AndroidX.material3)
+    implementation(Android.material)
+
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+
+    implementation(AndroidX.material3)
+
+    implementation(UILibrary.composeDestination)
+    "ksp"(UILibrary.kspDestination)
+
+    implementation(Koin.core)
+
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    implementation(project(":core:core-ui"))
+    implementation(project(":core:core_ui"))
+    implementation(project(":features:default:default_data"))
+    implementation(project(":features:default:default_domain"))
+    implementation(project(":features:default:default_presentation"))
+
+    debugImplementation(project(":features:default:default_data"))
+    debugImplementation(project(":features:default:default_domain"))
+    debugImplementation(project(":features:default:default_presentation"))
+
 }

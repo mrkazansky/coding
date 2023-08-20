@@ -14,7 +14,14 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/core/core-ui" />
+            <option value="$PROJECT_DIR$/core/core_data" />
+            <option value="$PROJECT_DIR$/core/core_testing" />
+            <option value="$PROJECT_DIR$/core/core_ui" />
+            <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/default" />
+            <option value="$PROJECT_DIR$/features/default/default_data" />
+            <option value="$PROJECT_DIR$/features/default/default_domain" />
+            <option value="$PROJECT_DIR$/features/default/default_presentation" />
           </set>
         </option>
       </GradleProjectSettings>
