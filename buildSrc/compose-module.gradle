@@ -11,6 +11,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        defaultPublishConfig 'release'
+        publishNonDefault true
     }
     buildFeatures {
         compose true
@@ -93,4 +96,5 @@ dependencies {
     androidTestImplementation(Testing.androidTestRule)
 
     implementation(project(":core:core_ui"))
+    debugImplementation(project(":core:core_ui"))
 }

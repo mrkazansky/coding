@@ -25,6 +25,9 @@ dependencies {
     implementation(DataLibrary.retrofitInterceptor)
 
     implementation(project(":features:search:search_domain"))
+    debugImplementation(project(":features:search:search_domain"))
+
     implementation(project(":core:core_data"))
+    debugImplementation(project(":core:core_data"))
 
 }

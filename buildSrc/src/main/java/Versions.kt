@@ -53,6 +53,7 @@ object Testing {
 
     const val androidJunitExt = "androidx.test.ext:junit:1.1.5"
     const val androidComposeTest = "androidx.compose.ui:ui-test-junit4:1.4.3"
+    const val androidTestCore = "androidx.test:core:1.5.0"
     const val androidTestRule = "androidx.test:rules:1.5.0"
 
 }

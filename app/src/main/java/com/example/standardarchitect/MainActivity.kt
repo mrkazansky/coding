@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeUiApi::class)
+
 package com.example.standardarchitect
 
 import android.os.Bundle
@@ -17,14 +19,17 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.compose.rememberNavController
-import com.kz.core.theme.StandardArchitectTheme
 import com.example.standardarchitect.navigation.AppNavigator
 import com.example.standardarchitect.navigation.HomeNavigation
 import com.example.standardarchitect.navigation.RootNavGraph
+import com.kz.core.theme.StandardArchitectTheme
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.navigation.dependency
 
@@ -45,7 +50,11 @@ class MainActivity : ComponentActivity() {
                     bottomBar = { HomeBottomBar(navigation) }
                 ) {
                     DestinationsNavHost(
-                        modifier = Modifier.padding(it),
+                        modifier = Modifier
+                            .padding(it)
+                            .semantics {
+                                testTagsAsResourceId = true
+                            },
                         navController = navController,
                         navGraph = RootNavGraph.root,
                         dependenciesContainerBuilder = {

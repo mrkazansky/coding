@@ -9,6 +9,7 @@ import com.kz.search_domain.usecase.ProductUseCase
 import kotlinx.coroutines.CloseableCoroutineDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -16,6 +17,7 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -24,6 +26,9 @@ data class SearchViewState(
     val products: PagingData<Product> = PagingData.empty()
 )
 
+sealed class SearchSideEffect {
+    data class NotifyProductAdded(val product: Product): SearchSideEffect()
+}
 class SearchViewModel(
     private val productUseCase: ProductUseCase,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
@@ -35,6 +40,9 @@ class SearchViewModel(
     val state = combine(_query, _products) { q, p ->
         SearchViewState(q, p)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(500), SearchViewState())
+
+    private val _sideEffect = Channel<SearchSideEffect>()
+    val sideEffect = _sideEffect.receiveAsFlow()
 
     init {
         viewModelScope.launch {
@@ -61,6 +69,7 @@ class SearchViewModel(
     fun addToCart(product: Product) {
         viewModelScope.launch {
             productUseCase.addToCart(product = product)
+            _sideEffect.send(SearchSideEffect.NotifyProductAdded(product))
         }
     }
 

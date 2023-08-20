@@ -12,6 +12,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/benchmark" />
+            <option value="$PROJECT_DIR$/benchmark/macro_benchmark" />
+            <option value="$PROJECT_DIR$/benchmark/micro_benchmark" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/core_data" />
@@ -22,7 +25,6 @@
             <option value="$PROJECT_DIR$/features/search/search_data" />
             <option value="$PROJECT_DIR$/features/search/search_domain" />
             <option value="$PROJECT_DIR$/features/search/search_presentation" />
-            <option value="$PROJECT_DIR$/test" />
           </set>
         </option>
       </GradleProjectSettings>

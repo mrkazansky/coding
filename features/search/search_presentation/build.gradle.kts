@@ -24,6 +24,7 @@ dependencies {
     implementation(UILibrary.coil)
 
     implementation(project(":features:search:search_domain"))
+    debugImplementation(project(":features:search:search_domain"))
 
     testImplementation(DataLibrary.pagingTesting)
 }

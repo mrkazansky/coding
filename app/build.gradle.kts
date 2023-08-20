@@ -29,6 +29,12 @@ android {
                 "proguard-rules.pro"
             )
         }
+        create("benchmark") {
+            initWith(buildTypes.getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -46,6 +52,11 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
         }
     }
 }
@@ -83,5 +94,10 @@ dependencies {
     implementation(project(":features:search:search_data"))
     implementation(project(":features:search:search_domain"))
     implementation(project(":features:search:search_presentation"))
+
+    debugImplementation(project(":core:core_ui"))
+    debugImplementation(project(":features:search:search_data"))
+    debugImplementation(project(":features:search:search_domain"))
+    debugImplementation(project(":features:search:search_presentation"))
 
 }

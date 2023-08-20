@@ -69,6 +69,16 @@ fun SearchScreen(viewModelStore: ViewModelStoreOwner? = null) {
         viewModel.state.map { it.products }
     }.collectAsLazyPagingItems()
 
+    LaunchedEffect(key1 = Unit, block = {
+        viewModel.sideEffect.collect {
+            when (it){
+                is SearchSideEffect.NotifyProductAdded -> {
+                    Toast.makeText(context, "Added ${it.product.title} to cart", LENGTH_SHORT).show()
+                }
+            }
+        }
+    })
+
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(text = stringResource(id = R.string.title_search_screen))
@@ -97,9 +107,9 @@ fun SearchScreen(viewModelStore: ViewModelStoreOwner? = null) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
+                    .testTag("item_list")
             ) { product ->
                 viewModel.addToCart(product)
-                Toast.makeText(context, "Added ${product.title} to cart", LENGTH_SHORT).show()
             }
         }
     }
